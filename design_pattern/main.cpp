@@ -5,6 +5,7 @@
 
 #include "SimpleFactory.h"
 #include "Factory.h"
+#include "AbstractFactory.h"
 
 // test simple factory 
 void testSimpleFactory()
@@ -41,11 +42,33 @@ void testFactory()
 	// 2) new和delete操作还暴露在外部，需要将其隐藏起来
 }
 
+// test abstract factory
+void testAbstractFactory()
+{
+	IWindowAbstractFactory* win_factory = createGUI(EGS_Irrlicht);
+	if (!win_factory)
+		return;
+	
+	IButton* btn = win_factory->createButton();
+	ICheckbox* checkbox = win_factory->createCheckbox();
+	IDialogbox* dialogbox = win_factory->createDialogbox();
+	
+	delete btn; btn = 0;
+	delete checkbox; checkbox = 0;
+	delete dialogbox; dialogbox = 0;
+
+	delete win_factory; win_factory = 0;
+}
+
 int main(int argc, char* argv[])
 {
 	// 1) Test simple factory :
 	// testSimpleFactory();
 	
 	// 2) Test factory :
-	testFactory();
+	//testFactory();
+	
+	// 3) Test abstract factory
+	testAbstractFactory();
+	
 }
