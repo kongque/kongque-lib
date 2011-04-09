@@ -1,5 +1,14 @@
+//
+// this program used to draw some polygons on screen, very basic OpenGL program :)
+// but, I still do this. why not ?
+//
+// author : kongque
+// date   : 04/09/2011
+//
+
 #include <GL/glut.h>
 #include <stdlib.h>
+
 
 static void resize(int width, int height)
 {
@@ -7,17 +16,33 @@ static void resize(int width, int height)
 	glViewport(0, 0, width, height);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glFrustum(-ar, ar, -1.0, 1.0, 1.0, 100.0);
+	glFrustum(-ar, ar, -1, 1, 1.0, 100.0);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
 
+float ptA[] = {-5.0f, 2.5f, -9.0f };
+float ptB[] = {-2.5f, 5.0f, -9.0f };
+float ptC[] = { 0.0f, 2.5f, -9.0f };
+
 static void display()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	// TODO: draw something
+	// draw a triangle
+	//glBegin(GL_TRIANGLES);
+	//	glVertex3f(ptA[0], ptA[1], ptA[2]);
+	//	glVertex3f(ptB[0], ptB[1], ptB[2]);
+	//	glVertex3f(ptC[0], ptC[1], ptC[2]);
+	//glEnd();
+
+	glBegin(GL_TRIANGLES);
+		glVertex3fv(ptA);
+		glVertex3fv(ptB);
+		glVertex3fv(ptC);
+	glEnd();
+
 	glutSwapBuffers();
 }
 

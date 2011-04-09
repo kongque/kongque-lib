@@ -1,18 +1,23 @@
 # author : kongque
 
-CC := g++
-LD := ld 
-CFLAGS :=
+CXX := g++
 LDFLAGS := -L/usr/lib/mesa -lglut
-OBJS := framebase.o
 
-framebase: $(OBJS) 
-	$(LD) $(LDFLAGS) -o framebase $(OBJS)
+TARGETS := framebase polygon color 
 
-$(OBJS): framebase.cpp
-	$(CC) -c framebase.cpp
+all: $(TARGETS)
+	
+
+framebase : framebase.cpp
+	$(CXX) $(LDFLAGS) -o framebase framebase.cpp
+
+polygon : polygon.cpp
+	$(CXX) $(LDFLAGS) -o polygon polygon.cpp
+
+color : color.cpp
+	$(CXX) $(LDFLAGS) -o color color.cpp
 
 .PHONY: clean
 clean:
-	rm framebase *.o
+	-rm -f *.o $(TARGETS) 
 
