@@ -3,7 +3,7 @@
 CXX := g++
 LDFLAGS := -L/usr/lib/mesa -lglut
 
-TARGETS := framebase polygon color texture
+TARGETS := framebase polygon color texture freetype2
 
 all: $(TARGETS)
 	
