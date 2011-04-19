@@ -17,14 +17,21 @@ bool loadImage()
 	int width = image->getImageWidth();
 	int height = image->getImageHeight();
 	printf("image width = %d, height = %d\n", width, height);
+	if (0 == gImageData)
+		return false;
 
+	const unsigned char* glExtensionString = glGetString(GL_EXTENSIONS);
+	printf("Extension : %s", glExtensionString);
+	FILE* f = fopen("extension.txt", "w");
+	fprintf(f, (const char*)glExtensionString);
+	fclose(f);
 
 	glGenTextures(1, &gTex[0]);
 	glBindTexture(GL_TEXTURE_2D, gTex[0]);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, gImageData);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, gImageData);
 
 	return true;
 }
@@ -48,10 +55,10 @@ static void display()
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, gTex[0]);
 	glBegin(GL_QUADS);
-		glTexCoord2f(0.0f, 0.0f); glVertex3f(-2.0, -1.0, -5.0);
-		glTexCoord2f(0.0f, 1.0f); glVertex3f(-2.0, 1.0, -5.0);
-		glTexCoord2f(1.0f, 1.0f); glVertex3f(0.0, 1.0, -5.0);
-		glTexCoord2f(1.0f, 0.0f); glVertex3f(0.0, -1.0, -5.0);
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(-2.0, -1.0, -3.0);
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(-2.0, 1.0, -3.0);
+		glTexCoord2f(1.0f, 1.0f); glVertex3f(0.0, 1.0, -3.0);
+		glTexCoord2f(1.0f, 0.0f); glVertex3f(0.0, -1.0, -3.0);
 	glEnd();
 
 	glutSwapBuffers();

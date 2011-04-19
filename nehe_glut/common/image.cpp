@@ -190,6 +190,7 @@ bool CImage::LoadTGA(bool bCompressed)
 
 	uiImageSize = m_uiHeight * m_uiWidth * (uiBpp / 8);
 	ucpData = new unsigned char[uiImageSize];
+	m_ucpImageData = ucpData;
 
 	if(!ucpData)
 	{
@@ -266,8 +267,8 @@ bool CImage::LoadTGA(bool bCompressed)
 	}
 		
 
-	delete [] ucpData;
-	delete [] m_ucpBuffer;
+	//delete [] ucpData;
+	//delete [] m_ucpBuffer;
 	return true;
 }
 
@@ -382,7 +383,7 @@ void CImage::VFlip(unsigned char * ucpData, unsigned int uiHeight, unsigned int 
 unsigned char* 
 CImage::getImageData() const
 {
-	return m_ucpBuffer;
+	return m_ucpImageData;
 }
 
 unsigned int 

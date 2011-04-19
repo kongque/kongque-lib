@@ -34,6 +34,7 @@ public:
 	{
 		m_szFilename = 0;
 		m_ucpBuffer = 0;
+		m_ucpImageData = 0;
 	}
 	
 	CImage(char * szFile, bool bMipMap = true)
@@ -45,6 +46,8 @@ public:
 
 	~CImage()
 	{
+		if (m_ucpBuffer) { delete [] m_ucpBuffer; }
+		if (m_ucpImageData) { delete [] m_ucpImageData; }
 	}
 
 private:
@@ -63,6 +66,7 @@ private:
 	unsigned int m_uiImage;
 	//file buffer
 	unsigned char * m_ucpBuffer;
+	unsigned char*  m_ucpImageData;
 	//mipmap?
 	bool m_bMipMap;
 	//filename
